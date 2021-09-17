@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>TDD</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/ordina.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <script src="js/head.min.js"></script>
+    <!--Add support for earlier versions of Internet Explorer -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Test Driven Development</h1>
+                <h3>Test, code, refactor, repeat</h3>
+            </section>
+
+            <section>
+                <h2>Hi, my name is Dimi.</h2>
+                <p>
+                    Developer
+                    <br /> Ordina Belgium
+                    <br /> https://github.com/DimiDeKerf
+                </p>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Test</h1>
+                </section>
+                <section>
+                    <h2>What is a test?</h2>
+                    <p>Process insuring the quality, performance and reliability of something is in place before bringing it into widespread use.</p>
+                </section>
+                <section>
+                    <h2>Test</h2>
+                    <ul>
+                        <li>Requirements are satisfied</li>
+                        <li>Responds correctly to all input (happy and unhappy flows)</li>
+                        <li>Performance</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Test Driven Development</h2>
+                    <p>Software development process relying on a short development cycle. Requirements are translated in tests, then the software is improved to only pass the new tests.</p>
+                </section>
+                <section>
+                    <h2>Red</h2>
+                    <p>Write a test that fails, verifying a specific case of the software.</p>
+                </section>
+                <section>
+                    <h2>Green</h2>
+                    <p>Implement the minimal amount of code in order to only pass the test.</p>
+                </section>
+                <section>
+                    <h2>Refactor</h2>
+                    <p>Refactor code, while making sure all tests still pass.</p>
+                </section>
+                <section>
+                    <h2>Test cycle</h2>
+                    <img data-src="img/tdd.png" alt="TDD">
+                    <p>Red - Green - Refactor</p>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Test Driven Development</h1>
+                </section>
+                <section>
+                    <h2>Development costs</h2>
+                    <p>Around 65% of costs goes to maintenance</p>
+                    <img data-src="img/development-costs.png" alt="Development costs">
+                </section>
+                <section>
+                    <h2>Why maintenance is so expensive?</h2>
+                    <ul>
+                        <li>Code entropy</li>
+                        <li>Isolated ownership</li>
+                        <li>No validation on code</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Legacy code</h2>
+                    <p>Code inherited from somebody else or older version of software</p>
+                </section>
+                <section>
+                    <h2>Legacy code</h2>
+                    <p>Usually no validation in place, making it hard to perform changes without breaking anything.</p>
+                </section>
+                <section>
+                    <h2>How can TDD help out?</h2>
+                </section>
+                <section>
+                    <h2>Business benefits</h2>
+                    <ul>
+                        <li>Verify requirements by defined tests</li>
+                        <li>Test failures prevents features from not working anymore with new version</li>
+                        <li>Lower maintenance costs</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Developer benefits</h2>
+                    <ul>
+                        <li>Design first mentality</li>
+                        <li>Avoid over-engineering</li>
+                        <li>Increase momentum</li>
+                        <li>Confidence to refactor</li>
+                        <li>Tests provide documentation for unit's API</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Customer benefits</h2>
+                    <ul>
+                        <li>Focus on real needs of customer</li>
+                        <li>Fast improvement cycle</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Testing applications</h1>
+                </section>
+                <section>
+                    <h2>Different ways of testing applications</h2>
+                    <ul>
+                        <li>Unit testing</li>
+                        <li>Integration testing</li>
+                        <li>Acceptance testing</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Unit tests</h2>
+                    <p>Small, fast tests. Part of the development cycle.</p>
+                </section> 
+                <section>
+                    <h2>Integration tests</h2>
+                    <p>Verify behavior between different units. Slower than unit tests</p>
+                </section>
+                <section>
+                    <h2>Acceptance tests</h2>
+                    <p>Test from the user point of view. Expensive tests to run</p>
+                </section>
+                <section>
+                    <h2>Testing pyramid</h2>
+                    <img data-src="img/testing-pyramid.png" alt="TDD">
+                </section>
+                <section>
+                    <h2>Unit tests</h2>
+                    <ul>
+                        <li>Tests a single unit, class</li>
+                        <li>No IO, network calls,...</li>
+                        <li>Mock dependencies</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Mocking</h2>
+                    <p>Remove dependencies to create a controlled environment for our unit.</p>
+                    <p>Mocks will have a predefined behavior.</p>
+                </section>
+                <section>
+                    <h2>Test API</h2>
+                    <p>Write unit tests for your public methods. The private methods should be hit by calling the public ones.</p>
+                </section>
+                <section>
+                    <h2>Code coverage</h2>
+                    <p>Metrics to determine the number of code lines that are validated by tests.</p>
+                </section>
+                <section>
+                    <h2>Code coverage</h2>
+                    <img data-src="img/code-coverage.png" alt="Code coverage">
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Testing frameworks</h1>
+                </section>
+                <section>
+                    <h2>Jasmine</h2>
+                    <p>Behavior-driven development framework.</p>
+                    <img data-src="img/jasmine.png" alt="Jasmine" height="200" width="200">
+                </section>
+                <section>
+                    <h2>Mocha</h2>
+                    <p>Alternative testing framework. Relative to JUnit.</p>
+                    <img data-src="img/mocha.svg" alt="Mocha" height="200" width="200">
+                </section>
+                <section>
+                    <h2>Karma</h2>
+                    <p>Test runner. Runs your tests in multiple browsers</p>
+                    <img data-src="img/karma.png" alt="Karma" height="200" width="200">
+                </section>
+                <section>
+                    <h2>Jest</h2>
+                    <p>Test framework developed by Facebook. Combination of both a testing framework and runner.</p>
+                    <img data-src="img/jest.png" alt="Jest" height="200" width="200">
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Writing tests</h1>
+                </section>
+                <section>
+                    <h2>Test file</h2>
+                    <p>Test are usually found in *.spec.ts or *.test.ts files</p>
+                </section>
+                <section>
+                    <h2>Test structure</h2>
+                    <pre><code class="javascript">
+describe('My awesome test', () => {
+    it('passes everytime', () => {
+        expect(true).toBe(true);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Test suite</h2>
+                    <p>Collection of several related tests.</p>
+                </section>
+                <section>
+                    <h2>describe</h2>
+                    <p>Describes high level summary of test suite. Describe blocks can be nested.</p>
+                </section>
+                <section>
+                    <h2>it</h2>
+                    <p>Describes a test spec.</p>
+                    <p>Usually has one expectation.</p>
+                </section>
+                <section>
+                    <h2>Setup</h2>
+                    <pre><code class="javascript">
+describe('My awesome test', () => {
+    beforeAll(() => {
+        // Runs before test suit
+    });
+
+    beforeEach(() => {
+        // Runs before every test
+    });
+
+    it('passes everytime', () => {
+        expect(true).toBe(true);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Teardown</h2>
+                    <p>Cleanup code, so test can run independently of eachother.</p>
+                    <pre><code class="javascript">
+describe('My awesome test', () => {
+    afterEach(() => {
+        // Runs after every test
+    });
+
+    afterAll(() => {
+        // Runs after test suit
+    });
+
+    it('passes everytime', () => {
+        expect(true).toBe(true);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Verification</h2>
+                    <p>Verify if result matches expectation.</p>
+                    <pre><code class="javascript">
+expect(true).toBe(true);
+
+expect(service.getName()).toBe('John');
+
+expect({}).toBeDefined();
+
+expect(null).toBeNull();
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Mock dependencies</h2>
+                    <p></p>
+                    <pre><code class="javascript">
+class Calculator {
+    sum(first, second) {
+        return first + second;
+    }
+}
+
+class MyComponent {
+    constructor(private calculator: Calculator) {}
+
+    sum(first, second) {
+        return this.calculator.sum(first, second);
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Mock dependencies</h2>
+                    <pre><code class="javascript">
+describe('MyComponent', () => {
+    let myComponent;
+    let calculatorMock;
+
+    beforeEach(() => {
+        calculatorMock = {
+            sum: () => 4
+        };
+        myComponent = new MyComponent(calculatorMock);
+    });
+
+    it('sums up 2 and 2', () => {
+        expect(myComponent.sum(2, 2)).toBe(4);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Mock dependencies</h2>
+                    <p>Most test frameworks come with mocking functionality.</p>
+                    <pre><code class="javascript">
+describe('MyComponent', () => {
+    let myComponent;
+    let calculatorMock;
+
+    beforeEach(() => {
+        calculatorMock = jasmine.createSpyObj('Calculator', ['sum']);
+        myComponent = new MyComponent(calculatorMock);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Spy</h2>
+                    <p>Stub a function and spy if function has been called during test.</p>
+                </section>
+                <section>
+                    <h2>Spy</h2>
+                    <pre><code class="javascript">
+describe('MyComponent', () => {
+    let myComponent;
+    let calculatorMock;
+
+    beforeEach(() => {
+        calculatorMock = jasmine.createSpyObj('Calculator', ['sum']);
+        myComponent = new MyComponent(calculatorMock);
+    });
+
+    it('calls the sum function', () => {
+        spyOn(calculatorMock, 'sum');
+
+        myComponent.sum(2, 2);
+
+        expect(calculatorMock.sum).toHaveBeenCalled();
+        expect(calculatorMock.sum).toHaveBeenCalledWith(2, 2); // Verify parameters
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Spy</h2>
+                    <p>Configure spies to return predefined value.</p>
+                    <pre><code class="javascript">
+describe('MyComponent', () => {
+    let myComponent;
+    let calculatorMock;
+
+    beforeEach(() => {
+        calculatorMock = jasmine.createSpyObj('Calculator', ['sum']);
+        myComponent = new MyComponent(calculatorMock);
+    });
+
+    it('sums up 2 and 2', () => {
+        spyOn(calculatorMock, 'sum').and.returnValue(5);
+
+        expect(myComponent.sum(2, 2)).toBe(5);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Nest describe blocks</h2>
+                    <p>Scope functions in describe block</p>
+                    <pre><code class="javascript">
+describe('MyComponent', () => {
+    let myComponent;
+    let calculatorMock;
+
+    beforeEach(() => {
+        calculatorMock = {
+            sum: () => 4
+        };
+        myComponent = new MyComponent(calculatorMock);
+    });
+
+    describe('.sum', () => {
+        it('sums up 2 and 2', () => {
+            expect(myComponent.sum(2, 2)).toBe(4);
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Test file next to implementation</h2>
+                    <ul>
+                        <li>Easy to find</li>
+                        <li>Test reveal API of implementation</li>
+                        <li>Reminder to update test when implementation changes</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Exercises</h2>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Dependency Injection</h1>
+                </section>  
+                <section>
+                    <h2>What is Dependency Injection?</h2>
+                    <p>Have an object supply the dependencies of another object by injecting them.</p>
+                </section>      
+                <section>
+                    <h2>Without Dependency Injection</h2>
+                    <p>Without Dependency Injection, we cannot replace the calculator in our test.</p>
+                    <pre><code class="javascript">
+class MyComponent {
+    private calculator: Calculator;
+
+    constructor() {
+        this.calculator = new Calculator();
+    }
+
+    sum(first, second) {
+        return this.calculator.sum(first, second);
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>With Dependency Injection</h2>
+                    <p>With Dependency Injection, we can replace the dependency in our test.</p>
+                    <pre><code class="javascript">
+class MyComponent {
+    private calculator: Calculator;
+
+    constructor(calculator: Calculator) {
+        this.calculator = calculator;
+    }
+
+    sum(first, second) {
+        return this.calculator.sum(first, second);
+    }
+}
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Asynchronous testing</h1>
+                </section>
+                <section>
+                    <h2>Asynchronous testing</h2>
+                    <p>Code often runs asynchronously, let our test framework know when code completes.</p>
+                </section>
+                <section>
+                    <h2>Asynchronous service</h2>
+                    <pre><code class="javascript">
+class MyService {
+    getProducts(): Promise&lt;string[]&gt; {
+        return new Promise(resolve => {
+            setTimeout(() => resolve(['Product 1', 'Product 2']), 2000)
+        });
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Asynchronous testing</h2>
+                    <p>Test won't wait for promise to be resolved</p>
+                </section>
+                <section>
+                    <h2>Callbacks</h2>
+                    <p>Call done argument inside the callback.</p>
+                    <pre><code class="javascript">
+describe('MyService', () => {
+    it('returns products', (done) => {
+        const myService = new MyService();
+        myService.getProducts().then(products => {
+            expect(products.length).toBe(2);
+            done();
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Promise</h2>
+                    <p>Return a Promise.</p>
+                    <pre><code class="javascript">
+describe('MyService', () => {
+    it('returns products', () => {
+        const myService = new MyService();
+        return myService.getProducts().then(products => {
+            expect(products.length).toBe(2);
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Async/await</h2>
+                    <p>Await for Promise to resolve.</p>
+                    <pre><code class="javascript">
+describe('MyService', () => {
+    it('returns products', async () => {
+        const myService = new MyService();
+        const products = await myService.getProducts();
+        expect(products.length).toBe(2);
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Observable</h2>
+                    <pre><code class="javascript">
+class MyService {
+    getProducts(): Observable&lt;string[]&gt; {
+        return of(['Product 1', 'Product 2']).pipe(
+            delay(2000)
+        );
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Observable</h2>
+                    <p>Subscribe to an observable.</p>
+                    <pre><code class="javascript">
+describe('MyService', () => {
+    it('returns products', () => {
+        const myService = new MyService();
+        myService.getProducts().subscribe(products => {
+            expect(products.length).toBe(2);
+            done();
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Observable</h2>
+                    <p>Convert to a Promise.</p>
+                    <pre><code class="javascript">
+describe('MyService', () => {
+    it('returns products', async () => {
+        const myService = new MyService();
+        const products = await myService.getProducts().toPromise();
+        expect(products.length).toBe(2);
+    });
+});
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Best practices</h1>
+                </section>
+                <section>
+                    <h2>Production code quality</h2>
+                    <p>Maintain the same quality for test code as for production code. Keep it readable and maintainable.</p>
+                </section> 
+                <section>
+                    <h2>Test both happy and unhappy flows</h2>
+                    <p>Cover negative cases as well, making sure the application can handle these cases.</p>
+                </section>
+                <section>
+                    <h2>Test both happy and unhappy flows</h2>
+                    <p>Cover negative cases as well, making sure the application can handle these cases.</p>
+                </section>
+                <section>
+                    <h2>Code coverage</h2>
+                    <p>Aim to write meaningful tests, not to have 100% coverage.</p>
+                </section> 
+                <section>
+                    <p>Independent test</p>
+                    <p>Execution order of tests should not matter. Test should run independently.</p>
+                </section>
+                <section>
+                    <h2>Unit tests don't cover eveything.</h2>
+                    <p>Don't only rely on unit tests to prevent bugs. Make sure to have other tests and verifications in place.</p>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Testing in Angular</h1>
+                </section>
+                <section>
+                    <h2>Testing in Angular</h2>
+                    <p>Angular uses Jasmine and Karma by default.</p>
+                    <p>Other testing frameworks can be configured.</p>
+                </section>
+                <section>
+                    <h2>Testing in Angular</h2>
+                    <p><pre><code>ng test</code></pre></p>
+                    <p>Launches Karma in watch mode, retriggering tests on code changes.</p>
+                </section>
+                <section>
+                    <h2>TestBed</h2>
+                    <p>Testing utility of Angular that initializes test environment and manages dependencies.</p>
+                </section>
+                <section>
+                    <h2>Services without TestBed</h2>
+                    <pre><code class="javascript">
+describe('ProductService', () => {
+    let service;
+    let httpClientMock;
+
+    beforeEach(() => {
+        httpClientMock = jasmine.createSpyObj('HttpClient', ['get']);
+        service = new ProductService();
+    });
+
+    describe('.getProducts', () => {
+        const expectedProducts: Product[] = [
+            {id: '1', name: 'Product1', description: '', productCode: 'P1'},
+            {id: '2', name: 'Product2', description: '', productCode: 'P2'},
+        ];
+
+        beforeEach(() => {
+            httpClientMock.get.and.returnValue(of(expectedProducts))
+        });
+
+        it('returns products', async () => {
+            const products = await service.getProducts().toPromise();
+            expect(products).toBe(2);
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Services with TestBed</h2>
+                    <pre><code class="javascript">
+describe('ProductService', () => {
+    let service: ProductService;
+    let httpMock: HttpTestingController;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [ HttpClientTestingModule ],
+            providers: [ProductService],
+          });
+        
+        service = TestBed.inject(ProductService);
+        httpMock = injector.get(HttpTestingController);
+    });
+
+    afterEach(() => {
+        httpMock.verify();
+    });
+
+    describe('.getProducts', () => {
+        const expectedProducts: Product[] = [
+            {id: '1', name: 'Product1', description: '', productCode: 'P1'},
+            {id: '2', name: 'Product2', description: '', productCode: 'P2'},
+        ];
+
+        beforeEach(() => {
+            const httpClient = TestBed.inject(HttpClient);
+            const getSpy = spyOn(httpClient, 'get');
+            getSpy.get.and.returnValue(of(expectedProducts))
+        });
+
+        it('returns products', async () => {
+            const products = await service.getProducts().toPromise();
+            expect(products).toBe(2);
+        });
+    });
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Components</h2>
+                    <p>Testing component can be divided in class and DOM testing.</p>
+                </section>
+                <section>
+                    <h2>Components</h2>
+                    <p>Testing component class is usually sufficient. Use TestBed to validate template.</p>
+                </section>
+            </section>
+
+            <!-- **********
+                DO NOT REMOVE
+            ********** -->
+            <section style="text-align: left;">
+                <h2>Thanks for watching!</h2>
+                <p class="fragment">and remember... Red, green, refactor!</p>
+            </section>
+
+            <section style="text-align: left;" data-background="img/jworks-wallpaper-3.jpg"></section>
+        </div>
+    </div>
+    <script src="js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            transition: 'convex',
+            dependencies: [
+                // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+                {
+                    src: 'lib/js/classList.js',
+                    condition: function () {
+                        return !document.body.classList;
+                    }
+                },
+                // Interpret Markdown in <section> elements
+                {
+                    src: 'plugin/markdown/marked.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'plugin/markdown/markdown.js',
+                    condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                // Syntax highlight for <code> elements
+                {
+                    src: 'plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                // Zoom in and out with Alt+click
+                {
+                    src: 'plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                // Speaker notes
+                {
+                    src: 'plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>
